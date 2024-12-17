@@ -6,6 +6,7 @@
   text-align: start;
   gap: 16px;
 
+
   .metaSection {
     display: flex;
     gap: 16px;
@@ -36,5 +37,11 @@
     width: 300px;
     height: 64px;
     font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #00a300;
+      transition: background-color 0.2s ease-in-out;
+    }
   }
 }

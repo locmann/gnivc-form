@@ -4,6 +4,7 @@ import { CustomSelect } from '@shared/ui/CustomSelect';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { IForm } from '@widgets/EmployeeForm/model/types';
 import { emailPattern } from '@shared/lib/emailPattern';
+import InputMask from 'react-input-mask';
 
 export const EmployeeForm = () => {
   const {
@@ -16,7 +17,10 @@ export const EmployeeForm = () => {
       sex: 'male',
     },
   });
-  const onSubmit: SubmitHandler<IForm> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IForm> = (data) => {
+    console.log(data);
+    alert('Форма валидна, отправляется запрос');
+  };
 
   const options = [
     { label: 'Мужской', value: 'male' },
@@ -70,11 +74,25 @@ export const EmployeeForm = () => {
           )}
         </div>
         <div className={styles.requiredField}>
-          <Input
-            placeholder="Мобильный телефон"
-            {...register('phone', { required: 'Поле является обязательным' })}
-            error={!!errors.phone}
-          />
+          <InputMask
+            mask="+7 (999) 999-99-99"
+            alwaysShowMask={false}
+            {...register('phone', {
+              required: 'Телефон обязателен',
+              pattern: {
+                value: /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
+                message: 'Введите корректный телефон',
+              },
+            })}
+          >
+            {(inputProps) => (
+              <Input
+                {...inputProps}
+                placeholder="Мобильный телефон"
+                error={!!errors.phone}
+              />
+            )}
+          </InputMask>
           {errors.phone && (
             <span style={{ color: 'red' }}>{errors.phone.message}</span>
           )}
@@ -99,7 +117,6 @@ export const EmployeeForm = () => {
         {...register('address')}
       />
       <Input placeholder="Название работодателя" {...register('job')} />
-      {/*<input type="submit" />*/}
       <button type="submit" className={styles.button}>
         СОХРАНИТЬ
       </button>
