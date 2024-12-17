@@ -1,5 +1,5 @@
-import styles from './styles/styles.module.scss';
+import { EmployeeForm } from '@widgets/EmployeeForm';
 
 export const App = () => {
-  return <div className={styles.wrapper}>qwe</div>;
+  return <EmployeeForm />;
 };

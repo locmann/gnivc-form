@@ -32,10 +32,10 @@ const config: webpack.Configuration = {
               modules: {
                 namedExport: false,
                 exportLocalsConvention: 'as-is',
-                auto: (resPath: string) => Boolean(resPath.includes('.module.')),
-                localIdentName: '[local]__[hash:base64:5]'
+                auto: (resPath: string) =>
+                  Boolean(resPath.includes('.module.')),
+                localIdentName: '[local]__[hash:base64:5]',
               },
-
             },
           },
           'sass-loader',
